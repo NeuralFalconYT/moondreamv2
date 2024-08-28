@@ -145,8 +145,10 @@ class AudioVisualizer:
                 y_position = wave_screen_height - 50 - (i * 30)
                 if Language=="English":
                     cv2.putText(image, line, (100, y_position), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+                elif Language=="Hindi":
+                    image=pill_text(image, line, (100, y_position), font_path='font/Hindi.ttf', font_size=20, font_color=(255, 255, 255))
                 elif Language=="Bengali":
-                    image=pill_text(image, line, (100, y_position), font_path='Bengali.ttf', font_size=20, font_color=(255, 255, 255))
+                    image=pill_text(image, line, (100, y_position), font_path='font/Bengali.ttf', font_size=20, font_color=(255, 255, 255))
                 else:
                     return image
 
