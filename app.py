@@ -1,7 +1,9 @@
 app_url = "https://b6a405e449777e6edf.gradio.live/"
 Language='English'
+# Language='English'# @param ['English','Hindi','Bengali','Afrikaans', 'Amharic', 'Arabic', 'Azerbaijani', 'Bulgarian', 'Bosnian', 'Catalan', 'Czech', 'Welsh', 'Danish', 'German', 'Greek', 'Spanish', 'French', 'Irish', 'Galician', 'Gujarati', 'Hebrew', 'Croatian', 'Hungarian', 'Indonesian', 'Icelandic', 'Italian', 'Japanese', 'Javanese', 'Georgian', 'Kazakh', 'Khmer', 'Kannada', 'Korean', 'Lao', 'Lithuanian', 'Latvian', 'Macedonian', 'Malayalam', 'Mongolian', 'Marathi', 'Malay', 'Maltese', 'Burmese', 'Norwegian Bokmål', 'Nepali', 'Dutch', 'Polish', 'Pashto', 'Portuguese', 'Romanian', 'Russian', 'Sinhala', 'Slovak', 'Slovenian', 'Somali', 'Albanian', 'Serbian', 'Sundanese', 'Swedish', 'Swahili', 'Tamil', 'Telugu', 'Thai', 'Turkish', 'Ukrainian', 'Urdu', 'Uzbek', 'Vietnamese', 'Chinese', 'Zulu']
+
 #bot name is 'meta'
-bot_name_bad_pronunciation=["meta",'meetha',"metre","matter"]
+# bot_name_bad_pronunciation=["meta",'meetha',"metre","matter"]
 
 import pyaudio
 import cv2
@@ -26,7 +28,6 @@ username=config['USERNAME']
 password=config['PASSWORD']
 
 
-# Language='English'# @param ['English','Hindi','Bengali','Afrikaans', 'Amharic', 'Arabic', 'Azerbaijani', 'Bulgarian', 'Bosnian', 'Catalan', 'Czech', 'Welsh', 'Danish', 'German', 'Greek', 'Spanish', 'French', 'Irish', 'Galician', 'Gujarati', 'Hebrew', 'Croatian', 'Hungarian', 'Indonesian', 'Icelandic', 'Italian', 'Japanese', 'Javanese', 'Georgian', 'Kazakh', 'Khmer', 'Kannada', 'Korean', 'Lao', 'Lithuanian', 'Latvian', 'Macedonian', 'Malayalam', 'Mongolian', 'Marathi', 'Malay', 'Maltese', 'Burmese', 'Norwegian Bokmål', 'Nepali', 'Dutch', 'Polish', 'Pashto', 'Portuguese', 'Romanian', 'Russian', 'Sinhala', 'Slovak', 'Slovenian', 'Somali', 'Albanian', 'Serbian', 'Sundanese', 'Swedish', 'Swahili', 'Tamil', 'Telugu', 'Thai', 'Turkish', 'Ukrainian', 'Urdu', 'Uzbek', 'Vietnamese', 'Chinese', 'Zulu']
 # Constants and initializations
 video_width = 640
 video_height = 480
@@ -54,15 +55,15 @@ except Exception as e:
 # Directory creation
 os.makedirs("./compressed_image", exist_ok=True)
 os.makedirs("./audio", exist_ok=True)
-# import textwrap
-# from PIL import ImageFont, ImageDraw
-# def pill_text(image, text, position, font_size=40, font_color=(255, 255, 255)):
-#     image=Image.fromarray(image)
-#     font = ImageFont.truetype('Hindi.ttf', font_size)
-#     draw = ImageDraw.Draw(image)
-#     draw.text(position, text, font=font, fill=font_color)
-#     image = np.array(image)
-#     return image
+import textwrap
+from PIL import ImageFont, ImageDraw
+def pill_text(image, text, position,font_path, font_size=40, font_color=(255, 255, 255)):
+    image=Image.fromarray(image)
+    font = ImageFont.truetype(font_path, font_size)
+    draw = ImageDraw.Draw(image)
+    draw.text(position, text, font=font, fill=font_color)
+    image = np.array(image)
+    return image
 play_obj = None
 subtitles = None
 current_prompt = ""
@@ -142,8 +143,12 @@ class AudioVisualizer:
             wrapped_text.append(' '.join(words))
             for i, line in enumerate(wrapped_text):
                 y_position = wave_screen_height - 50 - (i * 30)
-                cv2.putText(image, line, (100, y_position), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
-                # image=pill_text(image, line, (100, y_position), font_size=20, font_color=(255, 255, 255))
+                if Language=="English":
+                    cv2.putText(image, line, (100, y_position), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 2, cv2.LINE_AA)
+                elif Language=="Bengali":
+                    image=pill_text(image, line, (100, y_position), font_path='Bengali.ttf', font_size=20, font_color=(255, 255, 255))
+                else:
+                    return image
 
         return image
 
