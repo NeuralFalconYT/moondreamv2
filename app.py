@@ -3,7 +3,7 @@ Language='English'
 # Language='English'# @param ['English','Hindi','Bengali','Afrikaans', 'Amharic', 'Arabic', 'Azerbaijani', 'Bulgarian', 'Bosnian', 'Catalan', 'Czech', 'Welsh', 'Danish', 'German', 'Greek', 'Spanish', 'French', 'Irish', 'Galician', 'Gujarati', 'Hebrew', 'Croatian', 'Hungarian', 'Indonesian', 'Icelandic', 'Italian', 'Japanese', 'Javanese', 'Georgian', 'Kazakh', 'Khmer', 'Kannada', 'Korean', 'Lao', 'Lithuanian', 'Latvian', 'Macedonian', 'Malayalam', 'Mongolian', 'Marathi', 'Malay', 'Maltese', 'Burmese', 'Norwegian Bokmål', 'Nepali', 'Dutch', 'Polish', 'Pashto', 'Portuguese', 'Romanian', 'Russian', 'Sinhala', 'Slovak', 'Slovenian', 'Somali', 'Albanian', 'Serbian', 'Sundanese', 'Swedish', 'Swahili', 'Tamil', 'Telugu', 'Thai', 'Turkish', 'Ukrainian', 'Urdu', 'Uzbek', 'Vietnamese', 'Chinese', 'Zulu']
 
 #bot name is 'meta'
-# bot_name_bad_pronunciation=["meta",'meetha',"metre","matter"]
+bot_name_bad_pronunciation=["meta",'meetha',"metre","matter"]
 
 import pyaudio
 import cv2
@@ -247,7 +247,9 @@ if __name__ == "__main__":
 
     while True:
         ret, frame = cap.read()
-        frame = cv2.flip(frame, 1)
+        #add these line if you need
+        # frame = cv2.flip(frame, 1)
+        # frame=cv2.resize(frame,(video_width,video_height))
         if not ret:
             print("Error: Could not read frame.")
             continue
