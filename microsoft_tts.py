@@ -94,7 +94,7 @@ def translate_text(text, Language):
 female_voice_list={'Vietnamese': 'vi-VN-HoaiMyNeural',
  'Bengali': 'bn-BD-NabanitaNeural',
  'Thai': 'th-TH-PremwadeeNeural',
- 'English': 'en-AU-NatashaNeural',
+ 'English': 'en-US-AvaNeural',
  'Portuguese': 'pt-BR-FranciscaNeural',
  'Arabic': 'ar-AE-FatimaNeural',
  'Turkish': 'tr-TR-EmelNeural',
